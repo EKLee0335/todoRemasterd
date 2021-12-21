@@ -10,23 +10,32 @@ function Body(){
         setInput(event.target.value);
     }
     function addTodo(){
-        let item = {'id':id, 'content': inputStr};
-        settodo([...todo,item]);
-        setID(id+1)
-        setInput('');
+        if(inputStr===''){
+            window.alert("input can't be none");
+        }
+        else{
+          let item = {'id':id, 'content': inputStr};
+          settodo([...todo,item]);
+          setID(id+1);
+          setInput('');  
+        }
+        
     }
     function removeItem(id){
         let data = todo.filter((item)=>{return item.id!==id});
         settodo(data);
     }
     function editItem(id,content){
-        let data = todo;
-        data.forEach(function(item, index, array) {
+        if(content!==''){
+            let data = todo;
+            data.forEach(function(item, index, array) {
             if(item.id === id){
                 item.content = content;
             }
           })
-        settodo(data);
+        settodo(data); 
+        }
+        
     };
     return(
         <todos.Provider value={todo}>
