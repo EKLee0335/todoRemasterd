@@ -1,0 +1,6 @@
+.progress{
+    display: flex;
+    width: 200px;
+    height: 30px;
+    border: 2px solid black
+}

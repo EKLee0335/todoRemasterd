@@ -1,6 +1,6 @@
 import { useContext, useState } from "react/cjs/react.development";
 import { todos } from "../context/myContext";
-
+import './mainList.css'
 function MainList(props){
     const todo = useContext(todos);
     const [edit,setEdit] = useState(false);
@@ -14,26 +14,26 @@ function MainList(props){
         return data.map((item)=>{
                  if(edit){
                      if(item.id === editId){
-                          return <div key={item.id} style={{border:'1px solid red'}}> 
-                                  <input type='text' value={text} onChange={handelChange}/>
-                                 <button onClick={()=>checkedit(item.id)}>done</button>
+                          return <div className="list" key={item.id}> 
+                                    <input type='text' value={text} onChange={handelChange}/>
+                                    <button onClick={()=>checkedit(item.id)}>done</button>
                                 </div> 
                      }
                      else{
-                        return <div key={item.id} style={{border:'1px solid red'}}> 
-                        <p>{item.content}</p>
-                        <button onClick={()=>checkedit(item.id)}>edit</button>
-                        <button onClick={()=>props.removeItem(item.id)}>remove</button>
-                       </div>
+                        return <div className="list" key={item.id}> 
+                                    <p>{item.content}</p>
+                                    <button onClick={()=>checkedit(item.id)}>edit</button>
+                                    <button onClick={()=>props.removeItem(item.id)}>remove</button>
+                               </div>
                      }
                    
                  }
                  else{
-                    return <div key={item.id} style={{border:'1px solid red'}}> 
-                        <p>{item.content}</p>
-                        <button onClick={()=>checkedit(item.id)}>edit</button>
-                        <button onClick={()=>props.removeItem(item.id)}>remove</button>
-                       </div>
+                    return <div className="list" key={item.id}> 
+                                <p>{item.content}</p>
+                                <button onClick={()=>checkedit(item.id)}>edit</button>
+                                <button onClick={()=>props.removeItem(item.id)}>remove</button>
+                            </div>
                  }
                  
         })
@@ -45,10 +45,8 @@ function MainList(props){
         props.editItem(id,text);
     }
    
-    return  <div>
-                <div>
+    return  <div className="todos">
                 {show()}
-                </div>
-              </div>;
+            </div>;
 }
 export default MainList;

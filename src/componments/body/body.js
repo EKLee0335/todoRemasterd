@@ -1,11 +1,15 @@
 import AddingBar from "../addingBar/addingBar"
 import MainList from "../mainList/mainList";
-import { useState } from "react";
+import ProgressBar from "../progressBar/progressBar";
+import { useEffect, useState } from "react";
 import {text,todos} from '../context/myContext'
+import './body.css'
 function Body(){
     const [inputStr,setInput] = useState(''); // store input text
     const [id,setID] = useState(1); //id for item
     const [todo,settodo] = useState([]);//store all todo object
+    const [totalTask,setTotal] = useState(0); // store how many task u set today.
+    const [ifremove,setRemove] = useState(false);
     function textChange(event){
         setInput(event.target.value);
     }
@@ -18,6 +22,7 @@ function Body(){
           settodo([...todo,item]);
           setID(id+1);
           setInput('');  
+          setTotal(totalTask+1);
         }
         
     }
@@ -40,10 +45,11 @@ function Body(){
     return(
         <todos.Provider value={todo}>
             <text.Provider value={inputStr}>
-                <div>
+                <div className="body">
                     <AddingBar textChange={textChange} addTodo={addTodo}></AddingBar>
                     <MainList removeItem={removeItem} editItem={editItem}></MainList>
-                </div>
+                    <ProgressBar totalTask={totalTask}></ProgressBar>
+                </div>  
             </text.Provider>
         </todos.Provider>
     )
