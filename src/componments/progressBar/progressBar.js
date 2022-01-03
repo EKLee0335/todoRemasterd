@@ -3,14 +3,13 @@ import { todos } from '../context/myContext';
 import './progressBar.css'
 function ProgressBar(props){
     let todo = useContext(todos);
-    let total = props.totalTask;
-    let percent = Math.floor((todo.length/total)*100);
-    console.log(percent);
+    let percent = Math.floor((props.checkCnt/todo.length)*100);
+    if(todo.length===0) percent=0;
     return <div>
                 <div className="progress">
-                    <div style={{height:"100%",width: (100-percent)+"%", backgroundColor:"Highlight"}}></div>
+                    <div style={{height:"100%",width: percent+"%", backgroundColor:"Highlight"}}></div>
                 </div>
-                <p>{total-todo.length} of {total} tasks done</p>
+                <p>{props.checkCnt} of {todo.length} tasks done</p>
            </div>
           
 }

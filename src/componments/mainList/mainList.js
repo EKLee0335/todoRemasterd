@@ -6,7 +6,7 @@ function MainList(props){
     const [edit,setEdit] = useState(false);
     const [editId,setId] = useState();
     const [text,setText] = useState('');
-    function handelChange(event){
+    function handleChange(event){
         setText(event.target.value);
     }
     function show(){
@@ -15,12 +15,13 @@ function MainList(props){
                  if(edit){
                      if(item.id === editId){
                           return <div className="list" key={item.id}> 
-                                    <input type='text' value={text} onChange={handelChange}/>
+                                    <input className='editInput' type='text' value={text} onChange={handleChange}/>
                                     <button onClick={()=>checkedit(item.id)}>done</button>
                                 </div> 
                      }
                      else{
                         return <div className="list" key={item.id}> 
+                                    <input className="taskCheck" type='checkbox' onChange={()=>props.handleCheck(item.id)}></input>
                                     <p>{item.content}</p>
                                     <button onClick={()=>checkedit(item.id)}>edit</button>
                                     <button onClick={()=>props.removeItem(item.id)}>remove</button>
@@ -30,6 +31,7 @@ function MainList(props){
                  }
                  else{
                     return <div className="list" key={item.id}> 
+                                <input className="taskCheck" type='checkbox' onChange={()=>props.handleCheck(item.id)}></input>
                                 <p>{item.content}</p>
                                 <button onClick={()=>checkedit(item.id)}>edit</button>
                                 <button onClick={()=>props.removeItem(item.id)}>remove</button>
